@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - REPULSIVE
+  - BLUE_BOID
+  - BOUQUET
+  - SAM
+  - WORM
+  - RED_BOID
+  - CHOCOLATES
+  - SEED
+  - NERD
+  - ATTACKER
+  - CHEESE
+  - MOUSE
+  - BOID
+  - CHICK
   layers:
   - Default
   - TransparentFX
@@ -38,6 +52,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back
+    uniqueID: 711193413
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
