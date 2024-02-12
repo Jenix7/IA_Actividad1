@@ -20,6 +20,7 @@ TagManager:
   - CHICK
   - POTATO
   - NOPOTATO
+  - ENEMY
   layers:
   - Default
   - TransparentFX
