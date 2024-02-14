@@ -85,7 +85,8 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
         );
 
         Transition potatoVanished = new Transition("Potato Vanished",
-            () => { return detectedPotato == null || detectedPotato.Equals(null); }
+            () => { 
+                return detectedPotato == null || detectedPotato.Equals(null) || detectedPotato.tag != "POTATO"; }
         );
 
         Transition potatoReached = new Transition("Potato Reached",
@@ -122,13 +123,4 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
 
     }
 
-    //void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawWireSphere(transform.position, blackboard.potatoDetectionRadius);
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, blackboard.scarecrowDetectionRadius);
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireSphere(transform.position, blackboard.placeReachedRadius);
-    //}
 }

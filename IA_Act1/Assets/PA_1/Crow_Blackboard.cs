@@ -15,6 +15,9 @@ public class Crow_Blackboard : DynamicBlackboard
     public GameObject centerPoint;
     public GameObject scarecrow;
 
+    [Header("Activate gizmos")]
+    public bool gizmosActive;
+
 
     void Awake()
     {
@@ -46,13 +49,16 @@ public class Crow_Blackboard : DynamicBlackboard
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, potatoDetectionRadius);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, scarecrowDetectionRadius);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, placeReachedRadius);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, scarecrowSafeDistance);
+        if (gizmosActive)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, potatoDetectionRadius);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, scarecrowDetectionRadius);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, placeReachedRadius);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, scarecrowSafeDistance);
+        }
     }
 }

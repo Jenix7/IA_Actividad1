@@ -12,7 +12,8 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
     private Seek seek;
     private Scarecrow_Blackboard blackboard;
 
-    private GameObject raven;
+    private GameObject enemy;
+    private float elapsedTime;
 
 
     public override void OnEnter()
@@ -39,82 +40,64 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
 
     public override void OnConstruction()
     {
-        /* STAGE 1: create the states with their logic(s)
-         *-----------------------------------------------
+        ///* STAGE 1: create the states with their logic(s)
          
-        State varName = new State("StateName",
-            () => { }, // write on enter logic inside {}
-            () => { }, // write in state logic inside {}
-            () => { }  // write on exit logic inisde {}  
-        );
-
-         */
-        State wandering = new State("Wandering",
+        State WANDERING = new State("WANDERING",
             () => { wander.attractor = blackboard.attractor; wander.enabled = true; },
             () => { },
             () => { wander.enabled = false; }
          );
 
-        State reachingEnemy = new State("Reaching Enemy",
-           () => { seek.target = raven; seek.enabled = true; },
+        State REACH_ENEMY = new State("REACH ENEMY",
+           () => { seek.target = enemy; seek.enabled = true; },
            () => { },
            () => { seek.enabled = false; }
         );
 
-        State scare = new State("Scare",
-           () => { },
-           () => { },
-           () => { }
+        State SCARE = new State("SCARE",
+           () => { elapsedTime = 0; blackboard.Scream(true); },
+           () => { elapsedTime += Time.deltaTime; },
+           () => { elapsedTime = 0; blackboard.Scream(false); }
         );
 
 
-        /* STAGE 2: create the transitions with their logic(s)
-         * ---------------------------------------------------
+        ///* STAGE 2: create the transitions with their logic(s)
 
-        Transition varName = new Transition("TransitionName",
-            () => { }, // write the condition checkeing code in {}
-            () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
-        );
-
-        */
-        Transition enemyReached = new Transition("Enemy Reached",
-            () => { raven = SensingUtils.FindInstanceWithinRadius(gameObject, "CROW", blackboard.enemyDetectableRadius); 
-                return raven != null; }, 
+        Transition enemyDetected = new Transition("Enemy Detected",
+            () => {
+                enemy = SensingUtils.FindInstanceWithinRadius(gameObject, "CROW", blackboard.enemyDetectableRadius);
+                return enemy != null; }, 
             () => { } 
         );
 
-        Transition closeEnough = new Transition("Close Enough",
-            () => { return SensingUtils.DistanceToTarget(gameObject, raven) < blackboard.enemyReachedRadius; },
+        Transition enemyReached = new Transition("Enemy Reached",
+            () => { return SensingUtils.DistanceToTarget(gameObject, enemy) < blackboard.enemyReachedRadius; },
             () => { }
             );
 
-        Transition farEnough = new Transition("FarEnough",
-            () => { return SensingUtils.DistanceToTarget(gameObject, raven) > blackboard.enemyReachedRadius; },
+        Transition enemyVanished = new Transition("Enemy Vanished",
+            () => { return SensingUtils.DistanceToTarget(gameObject, enemy) > blackboard.enemyVanishedRadius; },
             () => { }
             );
 
+        Transition endScream = new Transition("FarEnough",
+            () => { return elapsedTime >= blackboard.screamDuration; },
+            () => { }
+            );
 
-        /* STAGE 3: add states and transitions to the FSM 
-         * ----------------------------------------------
-            
-        AddStates(...);
+        ///* STAGE 3: add states and transitions to the FSM 
 
-        AddTransition(sourceState, transition, destinationState);
+        AddStates(WANDERING, REACH_ENEMY, SCARE);
 
-         */
-
-        AddStates(wandering, reachingEnemy, scare);
-        AddTransition(wandering, enemyReached, reachingEnemy);
-        AddTransition(reachingEnemy, closeEnough, scare);
-        AddTransition(scare, farEnough, wandering);
+        AddTransition(WANDERING, enemyDetected, REACH_ENEMY);
+        AddTransition(REACH_ENEMY, enemyReached, SCARE);
+        AddTransition(REACH_ENEMY, enemyVanished, WANDERING);
+        AddTransition(SCARE, endScream, WANDERING);
 
 
-        /* STAGE 4: set the initial state
-         
-        initialState = ... 
-
-         */
-        initialState = wandering;
+        ///* STAGE 4: set the initial state
+        
+        initialState = WANDERING;
 
     }
 }
