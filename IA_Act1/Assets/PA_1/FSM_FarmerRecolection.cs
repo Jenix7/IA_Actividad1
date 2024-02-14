@@ -76,7 +76,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         */
 
         Transition potatoDetected = new Transition("potatoDetected",
-          () => { thePotato = SensingUtils.FindInstanceWithinRadius(gameObject, "POTATO", blackboard.farmerDetectionRadius);
+          () => {thePotato = SensingUtils.FindInstanceWithinRadius(gameObject, "POTATO", blackboard.farmerDetectionRadius);
               return thePotato != null;
           }, // write the condition checkeing code in {}
           () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
