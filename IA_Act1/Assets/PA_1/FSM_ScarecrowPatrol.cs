@@ -50,7 +50,7 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
 
          */
         State wandering = new State("Wandering",
-            () => { wander.enabled = true; },
+            () => { wander.attractor = blackboard.attractor; wander.enabled = true; },
             () => { },
             () => { wander.enabled = false; }
          );
@@ -78,7 +78,7 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
 
         */
         Transition enemyReached = new Transition("Enemy Reached",
-            () => { raven = SensingUtils.FindInstanceWithinRadius(gameObject, "ENEMY", blackboard.enemyDetectableRadius); 
+            () => { raven = SensingUtils.FindInstanceWithinRadius(gameObject, "CROW", blackboard.enemyDetectableRadius); 
                 return raven != null; }, 
             () => { } 
         );

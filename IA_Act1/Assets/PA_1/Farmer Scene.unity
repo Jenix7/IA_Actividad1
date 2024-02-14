@@ -1230,13 +1230,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4942944605415749866}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c84089e0acf3c8540bdb418abbe30c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationalPolicy: 4
-  attractor: {fileID: 1582542728}
+  rotationalPolicy: 0
+  attractor: {fileID: 0}
 --- !u!114 &4942944605415749868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,12 +1244,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4942944605415749866}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5af56a3272f5f2a49886d1d936f1cc41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationalPolicy: 4
+  rotationalPolicy: 0
   target: {fileID: 0}
 --- !u!114 &4942944605415749869
 MonoBehaviour:
@@ -1280,6 +1280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetectableRadius: 150
   enemyReachedRadius: 10
+  attractor: {fileID: 1582542728}
 --- !u!114 &4942944605415749871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,8 +1293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fadfb23a909584e8ff82b91a0977c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 40
-  maxSpeed: 0.5
+  maxAcceleration: 10
+  maxSpeed: 20
   clipVelocity: 1
   maxAngularAcceleration: 360
   maxAngularSpeed: 90
@@ -1315,9 +1316,9 @@ MonoBehaviour:
   repulsionWeight: 0.5
   alignmentWeight: 0.2
   addWanderIfZero: 1
-  wanderRate: 30
-  wanderRadius: 10
-  wanderOffset: 20
+  wanderRate: 180
+  wanderRadius: 20
+  wanderOffset: 60
   showWanderGizmos: 0
   wanderTargetOrientation: 0
   seekWeight: 0.2
