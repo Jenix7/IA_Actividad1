@@ -47,19 +47,19 @@ public class FSM_FarmerRecolection : FiniteStateMachine
 
          */
 
-        State wander = new State("wander",
+        State WANDERING = new State("WANDERING",
             () => { wanderAround.attractor = blackboard.ATTRACTOR; wanderAround.enabled = true; }, // write on enter logic inside {}
             () => { }, // write in state logic inside {}
             () => { wanderAround.enabled = false; }  // write on exit logic inisde {}  
         );
 
-        State goToPotato = new State("goToPotato",
+        State REACH_POTATO = new State("REACH_POTATO",
            () => { arrive.target = thePotato; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
            () => { arrive.enabled = false; thePotato.transform.parent = transform; thePotato.tag = "NOPOTATO"; }  // write on exit logic inisde {}  
        );
 
-        State goToBasket = new State("goToBasket",
+        State REACH_HOME = new State("REACH_HOME",
            () => { arrive.target = blackboard.BASKET_LOCATION; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
            () => { arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; }  // write on exit logic inisde {}  
@@ -75,19 +75,25 @@ public class FSM_FarmerRecolection : FiniteStateMachine
 
         */
 
-        Transition potatoDetected = new Transition("potatoDetected",
+        Transition potatoDetected = new Transition("Potato Detected",
           () => {thePotato = SensingUtils.FindInstanceWithinRadius(gameObject, "POTATO", blackboard.farmerDetectionRadius);
               return thePotato != null;
           }, // write the condition checkeing code in {}
           () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
       );
 
-        Transition potatoReached = new Transition("potatoReached",
+        Transition potatoReached = new Transition("Potato Reached",
            () => { return SensingUtils.DistanceToTarget(gameObject, thePotato) <= blackboard.potatoReachedRadius; }, // write the condition checkeing code in {}
            () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
        );
 
-        Transition basketReached = new Transition("basketReached",
+        Transition potatoVanished = new Transition("Potato Vanished",
+            () => {
+                return thePotato == null || thePotato.Equals(null) || thePotato.tag != "POTATO";
+            }
+        );
+
+        Transition homeReached = new Transition("Home Reached",
            () => { return SensingUtils.DistanceToTarget(gameObject, blackboard.BASKET_LOCATION) <= blackboard.basketReachedRadius; }, // write the condition checkeing code in {}
            () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
        );
@@ -100,11 +106,11 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         AddTransition(sourceState, transition, destinationState);
 
          */
-        AddStates(wander, goToPotato, goToBasket);
+        AddStates(WANDERING, REACH_POTATO, REACH_HOME);
 
-        AddTransition(wander, potatoDetected, goToPotato);
-        AddTransition(goToPotato, potatoReached, goToBasket);
-        AddTransition(goToBasket, basketReached, wander);
+        AddTransition(WANDERING, potatoDetected, REACH_POTATO);
+        AddTransition(REACH_POTATO, potatoReached, REACH_HOME);
+        AddTransition(REACH_HOME, homeReached, WANDERING);
 
 
         /* STAGE 4: set the initial state
@@ -112,6 +118,6 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         initialState = ... 
 
          */
-        initialState = wander;
+        initialState = WANDERING;
     }
 }
