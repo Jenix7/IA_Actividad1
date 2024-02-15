@@ -3,7 +3,7 @@
 public class MoveToClick : MonoBehaviour {
 
 	public bool rightClick = false;
-	
+    public ParticleSystem moveParticles;
     private int buttonNumber;
 
     void Start ()
@@ -22,6 +22,7 @@ public class MoveToClick : MonoBehaviour {
             Vector3 wantedPosition = Camera.main.ScreenToWorldPoint(new Vector3(click.x, click.y, 1f));
             wantedPosition.z = transform.position.z;
             transform.position = wantedPosition;
+            moveParticles.Play();
         }
 	}
 }
