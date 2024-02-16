@@ -12,6 +12,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
        Arrive arrive;
        WanderAround wanderAround;
        GameObject thePotato;
+       PotatoSpawner potatoSpawner;
 
     public override void OnEnter()
     {
@@ -21,6 +22,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         blackboard = GetComponent<Farmer_Blackboard>();
         arrive = GetComponent<Arrive>();
         wanderAround = GetComponent<WanderAround>();
+        potatoSpawner = GetComponent<PotatoSpawner>();
         base.OnEnter(); // do not remove
     }
 
@@ -56,13 +58,13 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         State REACH_POTATO = new State("REACH_POTATO",
            () => { arrive.target = thePotato; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
-           () => { arrive.enabled = false; thePotato.transform.parent = transform; thePotato.tag = "NOPOTATO"; }  // write on exit logic inisde {}  
+           () => { arrive.enabled = false; thePotato.transform.parent = transform; thePotato.tag = "NOPOTATO";  }  // write on exit logic inisde {}  
        );
 
         State REACH_HOME = new State("REACH_HOME",
            () => { arrive.target = blackboard.BASKET_LOCATION; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
-           () => { arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; }  // write on exit logic inisde {}  
+           () => { arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; potatoSpawner.potatoRecolectedCounter++; }  // write on exit logic inisde {}  
        );
 
         /* STAGE 2: create the transitions with their logic(s)
