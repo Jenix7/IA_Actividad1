@@ -9,6 +9,7 @@ public class Scarecrow_Blackboard : MonoBehaviour
     public float enemyReachedRadius = 10f;
     public float enemyVanishedRadius = 140f;
     public GameObject attractor;
+    public float energy = 25f;
     
     public float screamDuration = 1;
 
