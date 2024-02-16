@@ -9,7 +9,7 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
      * states and transitions and/or set in OnEnter or used in OnExit 
      * For instance: steering behaviours, blackboard, ...*/
     private WanderAroundPlusAvoid wander;
-    private Seek seek;
+    private ArrivePlusOA arrive;
     private Scarecrow_Blackboard blackboard;
 
     private GameObject enemy;
@@ -23,7 +23,7 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
          * Usually this code includes .GetComponent<...> invocations */
         blackboard = GetComponent<Scarecrow_Blackboard>();
         wander = GetComponent<WanderAroundPlusAvoid>();
-        seek = GetComponent<Seek>();
+        arrive = GetComponent<ArrivePlusOA>();
         
         base.OnEnter(); // do not remove
     }
@@ -49,9 +49,9 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
          );
 
         State REACH_ENEMY = new State("REACH ENEMY",
-           () => { seek.target = enemy; seek.enabled = true; },
+           () => { arrive.target = enemy; arrive.enabled = true; },
            () => { },
-           () => { seek.enabled = false; }
+           () => { arrive.enabled = false; }
         );
 
         State SCARE = new State("SCARE",
