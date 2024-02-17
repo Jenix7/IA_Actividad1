@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 214386030}
   m_Layer: 0
   m_Name: Pin
-  m_TagString: Untagged
+  m_TagString: PIN
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3247,7 +3247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823459bfcabf59e4bbb7d30c1033e0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fsm: {fileID: 11400000, guid: 3e0977e53889abb48830baaba4383de7, type: 2}
+  fsm: {fileID: 11400000, guid: 751253fa4dcb179439331d899a85453c, type: 2}
   currentState: 
   textMesh: {fileID: 0}
 --- !u!114 &4942944605415749870
@@ -3265,8 +3265,13 @@ MonoBehaviour:
   enemyDetectableRadius: 114.6
   enemyReachedRadius: 55
   enemyVanishedRadius: 140
+  pinDetectedRadius: 180
+  pinReachedRadius: 60
   attractor: {fileID: 1582542728}
+  pin: {fileID: 214386027}
   energy: 25
+  restingTime: 3
+  fullEnergy: 20
   screamDuration: 1
   scream: {fileID: 0}
   screamSprite: {fileID: 21300000, guid: 159a708dde32be246b38e04c083d48c4, type: 3}
