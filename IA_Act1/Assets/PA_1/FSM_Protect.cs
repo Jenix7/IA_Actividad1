@@ -8,12 +8,17 @@ public class FSM_Protect : FiniteStateMachine
     /* Declare here, as attributes, all the variables that need to be shared among
      * states and transitions and/or set in OnEnter or used in OnExit 
      * For instance: steering behaviours, blackboard, ...*/
+    private ArrivePlusOA arrive;
+    private Scarecrow_Blackboard blackboard;
+
 
     public override void OnEnter()
     {
         /* Write here the FSM initialization code. This code is execute every time the FSM is entered.
          * It's equivalent to the on enter action of any state 
          * Usually this code includes .GetComponent<...> invocations */
+        arrive = GetComponent<ArrivePlusOA>();
+        blackboard = GetComponent<Scarecrow_Blackboard>();
         base.OnEnter(); // do not remove
     }
 
@@ -23,6 +28,7 @@ public class FSM_Protect : FiniteStateMachine
          * It's equivalent to the on exit action of any state 
          * Usually this code turns off behaviours that shouldn't be on when one the FSM has
          * been exited. */
+        DisableAllSteerings();
         base.OnExit();
     }
 
@@ -42,9 +48,9 @@ public class FSM_Protect : FiniteStateMachine
         PATROL.Name = "PATROL";
 
         State reachPin = new State("Reach Pin",
-           () => { }, // write on enter logic inside {}
+           () => { arrive.target = blackboard.pin; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
-           () => { }  // write on exit logic inisde {}  
+           () => { arrive.enabled = false; }  // write on exit logic inisde {}  
        );
 
 
@@ -59,12 +65,12 @@ public class FSM_Protect : FiniteStateMachine
         */
 
         Transition pinDetected = new Transition("Pin Detected",
-            () => { return false; }, // write the condition checkeing code in {}
+            () => { blackboard.pin = SensingUtils.FindInstanceWithinRadius(gameObject, "PIN", blackboard.pinDetectedRadius); return blackboard.pin != null;  }, // write the condition checkeing code in {}
             () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
         );
 
         Transition pinReached = new Transition("Pin Reached",
-            () => { return false; }, // write the condition checkeing code in {}
+            () => { return SensingUtils.DistanceToTarget(gameObject, blackboard.pin) < blackboard.pinReachedRadius; }, // write the condition checkeing code in {}
             () => { }  // write the on trigger code in {} if any. Remove line if no on trigger action needed
         );
 
@@ -87,6 +93,6 @@ public class FSM_Protect : FiniteStateMachine
         initialState = ... 
 
          */
-
+        initialState = PATROL;
     }
 }

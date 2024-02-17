@@ -28,6 +28,7 @@ TagManager:
   - SCARECROW
   - STEALED_POTATO
   - CORN
+  - PIN
   layers:
   - Default
   - TransparentFX

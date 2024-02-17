@@ -8,8 +8,13 @@ public class Scarecrow_Blackboard : MonoBehaviour
     public float enemyDetectableRadius = 150f;
     public float enemyReachedRadius = 10f;
     public float enemyVanishedRadius = 140f;
+    public float pinDetectedRadius = 100f;
+    public float pinReachedRadius = 10f;
     public GameObject attractor;
-    public float energy = 25f;
+    public GameObject pin;
+    public float energy;
+    public float restingTime = 3f;
+    public float fullEnergy = 20f;
     
     public float screamDuration = 1;
 
