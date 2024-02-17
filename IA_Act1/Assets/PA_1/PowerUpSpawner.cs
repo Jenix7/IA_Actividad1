@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PotatoSpawner : MonoBehaviour
+public class PowerUpSpawner : MonoBehaviour
 {
 
     private GameObject sample;

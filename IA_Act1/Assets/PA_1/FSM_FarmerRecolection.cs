@@ -10,9 +10,9 @@ public class FSM_FarmerRecolection : FiniteStateMachine
      * For instance: steering behaviours, blackboard, ...*/
        Farmer_Blackboard blackboard;
        Arrive arrive;
-       WanderAround wanderAround;
+       WanderAroundPlusAvoid wanderAroundPlusAvoid;
        GameObject thePotato;
-       PotatoSpawner potatoSpawner;
+       PowerUpSpawner powerUpSpawner;
 
     public override void OnEnter()
     {
@@ -21,8 +21,8 @@ public class FSM_FarmerRecolection : FiniteStateMachine
          * Usually this code includes .GetComponent<...> invocations */
         blackboard = GetComponent<Farmer_Blackboard>();
         arrive = GetComponent<Arrive>();
-        wanderAround = GetComponent<WanderAround>();
-        potatoSpawner = GetComponent<PotatoSpawner>();
+        wanderAroundPlusAvoid = GetComponent<WanderAroundPlusAvoid>();
+        powerUpSpawner = GetComponent<PowerUpSpawner>();
         base.OnEnter(); // do not remove
     }
 
@@ -50,9 +50,9 @@ public class FSM_FarmerRecolection : FiniteStateMachine
          */
 
         State WANDERING = new State("WANDERING",
-            () => { wanderAround.attractor = blackboard.ATTRACTOR; wanderAround.enabled = true; }, // write on enter logic inside {}
+            () => { wanderAroundPlusAvoid.attractor = blackboard.ATTRACTOR; wanderAroundPlusAvoid.enabled = true; }, // write on enter logic inside {}
             () => { }, // write in state logic inside {}
-            () => { wanderAround.enabled = false; }  // write on exit logic inisde {}  
+            () => { wanderAroundPlusAvoid.enabled = false; }  // write on exit logic inisde {}  
         );
 
         State REACH_POTATO = new State("REACH_POTATO",
@@ -64,7 +64,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         State REACH_HOME = new State("REACH_HOME",
            () => { arrive.target = blackboard.BASKET_LOCATION; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
-           () => { arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; potatoSpawner.potatoRecolectedCounter++; }  // write on exit logic inisde {}  
+           () => { arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; powerUpSpawner.potatoRecolectedCounter++; }  // write on exit logic inisde {}  
        );
 
         /* STAGE 2: create the transitions with their logic(s)
