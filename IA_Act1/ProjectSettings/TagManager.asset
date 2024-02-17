@@ -72,3 +72,6 @@ TagManager:
   - name: Front
     uniqueID: 2901358949
     locked: 0
+  - name: Menu
+    uniqueID: 2883588383
+    locked: 0
