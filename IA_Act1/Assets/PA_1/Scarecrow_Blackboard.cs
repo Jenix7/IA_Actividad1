@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scarecrow_Blackboard : MonoBehaviour
 {
@@ -14,11 +15,16 @@ public class Scarecrow_Blackboard : MonoBehaviour
 
     [Space(20)]
     [Header("STATS")]
-    public float energy;
-    public float fullEnergy = 20f;
-    public float restingTime = 3f;
     public float screamDuration = 1;
     public float speedIncreaserSprint = 3f;
+
+    [Space(20)]
+    [Header("ENERGY")]
+    public Slider energySlider;
+    public float maxEnergy = 20f;
+    public float energy;
+    public float drainRate = 10f;
+    public float restoreRate = 10f;
 
     [Space(20)]
     [Header("SPRITES")]
@@ -53,6 +59,10 @@ public class Scarecrow_Blackboard : MonoBehaviour
         click_controller.PinIsReached(false);
         spr = GetComponent<SpriteRenderer>();
         sprintFX.SetActive(false);
+
+        energy = maxEnergy;
+        energySlider.maxValue = maxEnergy;
+        energySlider.value = energy;
     }
 
     public void Scream(bool on)
@@ -67,6 +77,12 @@ public class Scarecrow_Blackboard : MonoBehaviour
         sprintFX.SetActive(on);
         if (on) spr.sprite = sprintSprite;
         else spr.sprite = mainSprite;
+    }
+    public void ChangeEnergy(float amount)
+    {
+        energy += amount;
+        energy = Mathf.Clamp(energy, 0, maxEnergy); 
+        energySlider.value = energy; 
     }
 
     void OnDrawGizmos()

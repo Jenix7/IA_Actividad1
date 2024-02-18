@@ -3,7 +3,7 @@ using UnityEngine;
 using Steerings;
 
 [CreateAssetMenu(fileName = "FSM_Protect", menuName = "Finite State Machines/FSM_Protect", order = 1)]
-public class FSM_Protect : FiniteStateMachine
+public class FSM_ScarecrowProtect : FiniteStateMachine
 {
     private ArrivePlusOA arrive;
     private Scarecrow_Blackboard blackboard;
@@ -33,7 +33,8 @@ public class FSM_Protect : FiniteStateMachine
 
         State REACH_PIN = new State("REACH PIN",
            () => { arrive.target = blackboard.pin; arrive.enabled = true; steeringContext.maxSpeed *= blackboard.speedIncreaserSprint; blackboard.Sprint(true); }, // write on enter logic inside {}
-           () => { }, // write in state logic inside {}
+           () => { blackboard.ChangeEnergy(-blackboard.drainRate * Time.deltaTime);
+    }, // write in state logic inside {}
            () => { arrive.enabled = false; steeringContext.maxSpeed /= blackboard.speedIncreaserSprint; blackboard.Sprint(false); }  // write on exit logic inisde {}  
        );
 
