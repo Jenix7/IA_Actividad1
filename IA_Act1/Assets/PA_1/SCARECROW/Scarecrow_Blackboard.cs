@@ -31,11 +31,13 @@ public class Scarecrow_Blackboard : MonoBehaviour
     public Sprite mainSprite;
     public Sprite screamSprite;
     public Sprite sprintSprite;
+    public Sprite sleepSprite;
 
     [Space(20)]
     [Header("FX")]
     public GameObject screamFX;
     public GameObject sprintFX;
+    public GameObject sleepFX;
 
     //ELEMENTOS IMPORTADOS POR CÓDIGO con TAG/NAME (escondidos en el INSPECTOR)-----------------------------------
     [HideInInspector] public GameObject attractor;
@@ -59,6 +61,7 @@ public class Scarecrow_Blackboard : MonoBehaviour
         click_controller.PinIsReached(false);
         spr = GetComponent<SpriteRenderer>();
         sprintFX.SetActive(false);
+        sleepFX.SetActive(false);
 
         energy = maxEnergy;
         energySlider.maxValue = maxEnergy;
@@ -68,6 +71,8 @@ public class Scarecrow_Blackboard : MonoBehaviour
     public void Scream(bool on)
     {
         screamFX.SetActive(on);
+        sprintFX.SetActive(false);
+        sleepFX.SetActive(false);
         if (on) spr.sprite = screamSprite;
         else spr.sprite = mainSprite;
     }
@@ -75,9 +80,19 @@ public class Scarecrow_Blackboard : MonoBehaviour
     public void Sprint (bool on)
     {
         sprintFX.SetActive(on);
+        sleepFX.SetActive(false);
         if (on) spr.sprite = sprintSprite;
         else spr.sprite = mainSprite;
     }
+
+    public void Sleep(bool on)
+    {
+        sleepFX.SetActive(on);
+        sprintFX.SetActive(false);
+        if (on) spr.sprite = sleepSprite;
+        else spr.sprite = mainSprite;
+    }
+
     public void ChangeEnergy(float amount)
     {
         energy += amount;
