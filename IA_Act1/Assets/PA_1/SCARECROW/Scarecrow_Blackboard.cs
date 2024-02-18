@@ -56,7 +56,6 @@ public class Scarecrow_Blackboard : MonoBehaviour
         pin = GameObject.FindGameObjectWithTag("PIN");
         screamFX = transform.GetChild(0).gameObject;
         screamFX.SetActive(false);
-        mainSprite = GetComponent<SpriteRenderer>().sprite;
         click_controller = pin.GetComponent<MoveToClick>();
         click_controller.PinIsReached(false);
         spr = GetComponent<SpriteRenderer>();

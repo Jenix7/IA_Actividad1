@@ -21,7 +21,7 @@ public class MoveToClick : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetMouseButtonDown(buttonNumber))
+        if (Input.GetMouseButtonDown(buttonNumber) && Time.timeScale == 1f)
         {
             Vector3 click = Input.mousePosition;
 
@@ -49,7 +49,8 @@ public class MoveToClick : MonoBehaviour {
 
     private bool IsClickAllowed(Vector3 clickPosition)
     {
-        return allowedClickArea.Contains(clickPosition);
+        return true;
+        //return allowedClickArea.Contains(clickPosition);
     }
 
     void OnDrawGizmos()
