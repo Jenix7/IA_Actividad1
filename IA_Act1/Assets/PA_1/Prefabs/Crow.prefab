@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potatoDetectionRadius: 110
-  scarecrowDetectionRadius: 30
+  scarecrowDetectionRadius: 45
   scarecrowSafeDistance: 220
   placeReachedRadius: 15
   nestList: []

@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Crow_Blackboard : DynamicBlackboard
 {
+    [Space(10)]
+    [Header("RADIOUS")]
     public float potatoDetectionRadius = 150f;
     public float scarecrowDetectionRadius = 170f;
     public float scarecrowSafeDistance = 220f;
     public float placeReachedRadius = 15;
 
-    public GameObject[] nestList;
+    [Space(20)]
+    [Header("STATS")]
     public float speedDecreaserTakingPotato = 2f;
     public float speedIncreaserFlee = 2f;
-    public GameObject centerPoint;
-    public GameObject scarecrow;
 
+    //ELEMENTOS IMPORTADOS POR CÓDIGO con TAG/NAME (escondidos en el INSPECTOR)-----------------------------------
+    [HideInInspector] public GameObject[] nestList;
+    [HideInInspector] public GameObject centerPoint;
+    [HideInInspector] public GameObject scarecrow;
+
+    // ACTIVADOR DE GIZMOS----------------------------------------------------------------------------------------
     [Header("Activate gizmos")]
     public bool gizmosActive;
 

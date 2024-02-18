@@ -18,22 +18,16 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
 
     public override void OnEnter()
     {
-        /* Write here the FSM initialization code. This code is execute every time the FSM is entered.
-         * It's equivalent to the on enter action of any state 
-         * Usually this code includes .GetComponent<...> invocations */
+        
         blackboard = GetComponent<Scarecrow_Blackboard>();
         wander = GetComponent<WanderAroundPlusAvoid>();
         arrive = GetComponent<ArrivePlusOA>();
-        
-        base.OnEnter(); // do not remove
+
+        base.OnEnter(); 
     }
 
     public override void OnExit()
     {
-        /* Write here the FSM exiting code. This code is execute every time the FSM is exited.
-         * It's equivalent to the on exit action of any state 
-         * Usually this code turns off behaviours that shouldn't be on when one the FSM has
-         * been exited. */
         base.DisableAllSteerings();
         base.OnExit();
     }

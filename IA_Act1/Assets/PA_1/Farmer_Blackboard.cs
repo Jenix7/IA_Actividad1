@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Farmer_Blackboard : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
-    //[Header("Recolection")]
-    public GameObject BASKET_LOCATION;
-    public GameObject ATTRACTOR;
+
+    [Space(10)]
+    [Header("RADIOUS")]
     public float farmerDetectionRadius = 110;
     public float potatoReachedRadius = 10;
     public float basketReachedRadius = 10;
 
-    [Header("Activate gizmos")]
+    //ELEMENTOS IMPORTADOS POR CÓDIGO con TAG/NAME (escondidos en el INSPECTOR)-----------------------------------
+    [HideInInspector] public GameObject BASKET_LOCATION;
+    [HideInInspector] public GameObject ATTRACTOR;
+
+    // ACTIVADOR DE GIZMOS----------------------------------------------------------------------------------------
+    [Space(40)]
+    [Header("---- Activate gizmos ------------------------------")]
     public bool gizmosActive;
 
     void Start()
