@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 4931070654380282456}
   - component: {fileID: 2643450550896302624}
   - component: {fileID: 2048476276582381041}
+  - component: {fileID: -2951827511317206264}
   - component: {fileID: -6102987240720473223}
   - component: {fileID: 1653412722675730751}
   - component: {fileID: -2005569735086961938}
   - component: {fileID: -893821992299750170}
-  - component: {fileID: -2089233265129477149}
   m_Layer: 0
   m_Name: Farmer
   m_TagString: Untagged
@@ -131,9 +131,9 @@ MonoBehaviour:
   showWanderGizmos: 1
   wanderTargetOrientation: 0
   seekWeight: 0.6
-  lookAheadLength: 10
-  avoidDistance: 10
-  secondaryWhiskerAngle: 10
+  lookAheadLength: 8
+  avoidDistance: 10.03
+  secondaryWhiskerAngle: 30
   secondaryWhiskerRatio: 0.7
   perseveranceTime: 0
   showAvoidanceGizmos: 1
@@ -144,6 +144,20 @@ MonoBehaviour:
   speed: 0
   angularSpeed: 0
   groupManager: {fileID: 0}
+--- !u!114 &-2951827511317206264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4807410194583572046}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1c6fa0d5ba45c4eb509c1ad6e53e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationalPolicy: 0
+  target: {fileID: 0}
 --- !u!114 &-6102987240720473223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,17 +221,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationalPolicy: 0
   attractor: {fileID: 0}
---- !u!114 &-2089233265129477149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807410194583572046}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2403716d186eab49b90eb93fe37b8e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationalPolicy: 0
-  target: {fileID: 0}

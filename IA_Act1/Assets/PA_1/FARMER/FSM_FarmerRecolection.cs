@@ -9,7 +9,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
      * states and transitions and/or set in OnEnter or used in OnExit 
      * For instance: steering behaviours, blackboard, ...*/
        Farmer_Blackboard blackboard;
-       ArrivePlusOA arrivePlusOA;
+       Arrive arrive;
        WanderAroundPlusAvoid wanderAroundPlusAvoid;
        GameObject thePotato;
        PowerUpSpawner powerUpSpawner;
@@ -22,7 +22,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
          * It's equivalent to the on enter action of any state 
          * Usually this code includes .GetComponent<...> invocations */
         blackboard = GetComponent<Farmer_Blackboard>();
-        arrivePlusOA = GetComponent<ArrivePlusOA>();
+        arrive = GetComponent<Arrive>();
         wanderAroundPlusAvoid = GetComponent<WanderAroundPlusAvoid>();
         powerUpSpawner = GetComponent<PowerUpSpawner>();
         context = GetComponent<SteeringContext>();
@@ -59,15 +59,15 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         );
 
         State REACH_POTATO = new State("REACH_POTATO",
-           () => { context.maxSpeed = originalMaxAcceleration; arrivePlusOA.target = thePotato; arrivePlusOA.enabled = true; }, // write on enter logic inside {}
+           () => { context.maxSpeed = 20.0f; arrive.target = thePotato; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
-           () => { arrivePlusOA.enabled = false; thePotato.transform.parent = transform; thePotato.tag = "NOPOTATO";  }  // write on exit logic inisde {}  
+           () => { arrive.enabled = false; thePotato.transform.parent = transform; thePotato.tag = "NOPOTATO";  }  // write on exit logic inisde {}  
        );
 
         State REACH_HOME = new State("REACH_HOME",
-           () => { arrivePlusOA.target = blackboard.BASKET_LOCATION; arrivePlusOA.enabled = true; }, // write on enter logic inside {}
+           () => { arrive.target = blackboard.BASKET_LOCATION; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
-           () => { context.maxSpeed = 0.0f; arrivePlusOA.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; powerUpSpawner.potatoRecolectedCounter++; Destroy(thePotato); }  // write on exit logic inisde {}  
+           () => { context.maxSpeed = 0.0f; arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; powerUpSpawner.potatoRecolectedCounter++; Destroy(thePotato); }  // write on exit logic inisde {}  
        );
 
         /* STAGE 2: create the transitions with their logic(s)
@@ -114,7 +114,6 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         AddStates(WANDERING, REACH_POTATO, REACH_HOME);
 
         AddTransition(WANDERING, potatoDetected, REACH_POTATO);
-        AddTransition(REACH_POTATO, potatoVanished, WANDERING);
         AddTransition(REACH_POTATO, potatoReached, REACH_HOME);
         AddTransition(REACH_HOME, homeReached, WANDERING);
 
