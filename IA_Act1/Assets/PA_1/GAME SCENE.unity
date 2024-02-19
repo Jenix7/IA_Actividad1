@@ -1193,7 +1193,7 @@ Transform:
   m_GameObject: {fileID: 693742257}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 125.0702, y: 72, z: 3.4500248}
+  m_LocalPosition: {x: 125.0702, y: 73.7, z: 3.4500248}
   m_LocalScale: {x: 4.250333, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3428,7 +3428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7630155914979572382, guid: c23aa7389918da74d8906e37b59c5677, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 106
+      value: 91.6
       objectReference: {fileID: 0}
     - target: {fileID: 7630155914979572382, guid: c23aa7389918da74d8906e37b59c5677, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3710,10 +3710,6 @@ PrefabInstance:
     - target: {fileID: -6102987240720473223, guid: a51e7441d6953db4ca2326704bf25fb8, type: 3}
       propertyPath: potatoReachedRadius
       value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: -2951827511317206264, guid: a51e7441d6953db4ca2326704bf25fb8, type: 3}
-      propertyPath: rotationalPolicy
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2048476276582381041, guid: a51e7441d6953db4ca2326704bf25fb8, type: 3}
       propertyPath: maxSpeed
