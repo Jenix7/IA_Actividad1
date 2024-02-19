@@ -13,8 +13,6 @@ public class FSM_FarmerRecolection : FiniteStateMachine
        WanderAroundPlusAvoid wanderAroundPlusAvoid;
        GameObject thePotato;
        PowerUpSpawner powerUpSpawner;
-       SteeringContext context;
-       private float originalMaxAcceleration = 20.0f;
 
     public override void OnEnter()
     {
@@ -25,7 +23,6 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         arrive = GetComponent<Arrive>();
         wanderAroundPlusAvoid = GetComponent<WanderAroundPlusAvoid>();
         powerUpSpawner = GetComponent<PowerUpSpawner>();
-        context = GetComponent<SteeringContext>();
         base.OnEnter(); // do not remove
     }
 
@@ -53,13 +50,13 @@ public class FSM_FarmerRecolection : FiniteStateMachine
          */
 
         State WANDERING = new State("WANDERING",
-            () => { context.maxSpeed = originalMaxAcceleration; wanderAroundPlusAvoid.attractor = blackboard.ATTRACTOR; wanderAroundPlusAvoid.enabled = true; }, // write on enter logic inside {}
+            () => { wanderAroundPlusAvoid.attractor = blackboard.ATTRACTOR; wanderAroundPlusAvoid.enabled = true; }, // write on enter logic inside {}
             () => { }, // write in state logic inside {}
             () => { wanderAroundPlusAvoid.enabled = false; }  // write on exit logic inisde {}  
         );
 
         State REACH_POTATO = new State("REACH_POTATO",
-           () => { context.maxSpeed = 20.0f; arrive.target = thePotato; arrive.enabled = true; }, // write on enter logic inside {}
+           () => { arrive.target = thePotato; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
            () => { arrive.enabled = false; thePotato.transform.parent = transform; thePotato.tag = "NOPOTATO";  }  // write on exit logic inisde {}  
        );
@@ -67,7 +64,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         State REACH_HOME = new State("REACH_HOME",
            () => { arrive.target = blackboard.BASKET_LOCATION; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
-           () => { context.maxSpeed = 0.0f; arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; powerUpSpawner.potatoRecolectedCounter++; Destroy(thePotato); }  // write on exit logic inisde {}  
+           () => { arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; powerUpSpawner.potatoRecolectedCounter++; }  // write on exit logic inisde {}  
        );
 
         /* STAGE 2: create the transitions with their logic(s)
