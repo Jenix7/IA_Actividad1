@@ -64,7 +64,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         State REACH_HOME = new State("REACH_HOME",
            () => { arrive.target = blackboard.BASKET_LOCATION; arrive.enabled = true; }, // write on enter logic inside {}
            () => { }, // write in state logic inside {}
-           () => { arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; powerUpSpawner.potatoRecolectedCounter++; }  // write on exit logic inisde {}  
+           () => { arrive.enabled = false; thePotato.transform.parent = null; thePotato.tag = "NOPOTATO"; powerUpSpawner.potatoRecolectedCounter++; Score.potatoScoreValue++; }  // write on exit logic inisde {}  
        );
 
         /* STAGE 2: create the transitions with their logic(s)
