@@ -68,7 +68,7 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
                 steeringContext.maxSpeed = steeringContext.maxSpeed/blackboard.speedDecreaserTakingPotato;
             },
             () => { },
-            () => { arrive.enabled = false; steeringContext.maxSpeed *= blackboard.speedDecreaserTakingPotato; }
+            () => { arrive.enabled = false; steeringContext.maxSpeed *= blackboard.speedDecreaserTakingPotato; Score.potatoRecolectedInScene++; }
         );
 
         //STAGE 2----------------------------------------

@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     public static int potatoScoreValue = 0;
-    public int WinReachNumber = 1;
+    public int WinReachNumber = 0;
+    public int totalPotatoInScene = 0;
+    public static int potatoRecolectedInScene = 0;
     public static bool isGameOver = false;
     public static bool isGameWon = false;
     public GameObject sceneHUD;
@@ -27,6 +29,7 @@ public class Score : MonoBehaviour
         winMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         isGameWon = false;
+        isGameOver = false;
 
     }
 
@@ -34,9 +37,13 @@ public class Score : MonoBehaviour
     void Update()
     {
         score.text = "" + potatoScoreValue;
-        if (potatoScoreValue >= WinReachNumber)
+        if (potatoScoreValue >= WinReachNumber && potatoRecolectedInScene == totalPotatoInScene)
         {
             isGameWon = true;
+        }
+        if (potatoScoreValue < WinReachNumber && potatoRecolectedInScene == totalPotatoInScene)
+        {
+            isGameOver = true;
         }
         if (isGameOver)
         {
@@ -52,7 +59,8 @@ public class Score : MonoBehaviour
             sceneHUD.SetActive(false);
             PauseGame();
             winMenu.SetActive(true);
-
+            
+            
         }
     }
     public void PauseGame()
@@ -62,5 +70,14 @@ public class Score : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1;
+    }
+
+    public void RestartScene()
+    {
+        potatoScoreValue = 0;
+        potatoRecolectedInScene = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+
     }
 }

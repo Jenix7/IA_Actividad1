@@ -121,9 +121,9 @@ MonoBehaviour:
   scarecrowDetectionRadius: 45
   scarecrowSafeDistance: 220
   placeReachedRadius: 15
-  nestList: []
   speedDecreaserTakingPotato: 2
   speedIncreaserFlee: 4
+  nestList: []
   centerPoint: {fileID: 0}
   scarecrow: {fileID: 0}
   gizmosActive: 1
