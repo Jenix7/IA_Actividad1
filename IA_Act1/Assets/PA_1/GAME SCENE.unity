@@ -2086,8 +2086,8 @@ Transform:
   m_GameObject: {fileID: 720353600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -172.01514, y: -86.9817, z: 3.4500248}
-  m_LocalScale: {x: 10.171197, y: 1, z: 1}
+  m_LocalPosition: {x: -172.01514, y: -93.91547, z: 3.4500248}
+  m_LocalScale: {x: 9.728548, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1761088603}
@@ -3279,8 +3279,8 @@ Transform:
   m_GameObject: {fileID: 1351189960}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 128.2147, y: 58, z: 3.4500248}
-  m_LocalScale: {x: 20.0459, y: 1, z: 1}
+  m_LocalPosition: {x: 127.752365, y: 58, z: 3.4500248}
+  m_LocalScale: {x: 18.540737, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1761088603}
@@ -3472,7 +3472,7 @@ Transform:
   m_GameObject: {fileID: 1394464199}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: 0.0099997, z: 357}
+  m_LocalPosition: {x: -0.12, y: 0.0099997, z: 17}
   m_LocalScale: {x: 13, y: 13, z: 13}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3736,8 +3736,8 @@ Transform:
   m_GameObject: {fileID: 1503102863}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 427.98486, y: -86.4672, z: 3.4500248}
-  m_LocalScale: {x: 10.230541, y: 1, z: 1}
+  m_LocalPosition: {x: 427.98486, y: -94.32546, z: 3.4500248}
+  m_LocalScale: {x: 9.728548, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1761088603}
@@ -5406,8 +5406,8 @@ Transform:
   m_GameObject: {fileID: 2029719879}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 128.2147, y: -230.95007, z: 3.4500248}
-  m_LocalScale: {x: 19.988115, y: 1, z: 1}
+  m_LocalPosition: {x: 127.752365, y: -230.95007, z: 3.4500248}
+  m_LocalScale: {x: 18.540737, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1761088603}
@@ -6160,7 +6160,7 @@ MonoBehaviour:
   enemyVanishedRadius: 140
   pinReachedRadius: 50
   screamDuration: 1
-  speedIncreaserSprint: 2
+  speedIncreaserSprint: 4
   energySlider: {fileID: 1469850000}
   maxEnergy: 20
   energy: 25
@@ -6218,10 +6218,10 @@ MonoBehaviour:
   showWanderGizmos: 1
   wanderTargetOrientation: 0
   seekWeight: 0.2
-  lookAheadLength: 70
+  lookAheadLength: 60
   avoidDistance: 80
   secondaryWhiskerAngle: 40
-  secondaryWhiskerRatio: 0.8
+  secondaryWhiskerRatio: 0.9
   perseveranceTime: 1
   showAvoidanceGizmos: 1
   perseveranceElapsed: 0
@@ -6243,7 +6243,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4942944605415749866}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2403716d186eab49b90eb93fe37b8e3, type: 3}
   m_Name: 
@@ -6269,10 +6269,6 @@ PrefabInstance:
     - target: {fileID: -6102987240720473223, guid: a51e7441d6953db4ca2326704bf25fb8, type: 3}
       propertyPath: potatoReachedRadius
       value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: -6102987240720473223, guid: a51e7441d6953db4ca2326704bf25fb8, type: 3}
-      propertyPath: farmerDetectionRadius
-      value: 411.9
       objectReference: {fileID: 0}
     - target: {fileID: -2951827511317206264, guid: a51e7441d6953db4ca2326704bf25fb8, type: 3}
       propertyPath: rotationalPolicy
@@ -6363,10 +6359,6 @@ PrefabInstance:
     - target: {fileID: 1504126271832332203, guid: 50654989303103543a52cee1206c1940, type: 3}
       propertyPath: gizmosActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1504126271832332203, guid: 50654989303103543a52cee1206c1940, type: 3}
-      propertyPath: speedDecreaserTakingPotato
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6950619354969848251, guid: 50654989303103543a52cee1206c1940, type: 3}
       propertyPath: m_LocalPosition.x

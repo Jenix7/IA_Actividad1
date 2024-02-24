@@ -11,7 +11,6 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
     private WanderAroundPlusAvoid wander;
     private ArrivePlusOA arrive;
     private Scarecrow_Blackboard blackboard;
-    
 
     private GameObject enemy;
     private float elapsedTime;
@@ -23,7 +22,6 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
         blackboard = GetComponent<Scarecrow_Blackboard>();
         wander = GetComponent<WanderAroundPlusAvoid>();
         arrive = GetComponent<ArrivePlusOA>();
-       
 
         base.OnEnter(); 
     }
@@ -39,7 +37,7 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
         ///* STAGE 1: create the states with their logic(s)
          
         State WANDERING = new State("WANDERING",
-            () => {wander.attractor = blackboard.attractor; wander.enabled = true; },
+            () => { wander.attractor = blackboard.attractor; wander.enabled = true; },
             () => { },
             () => { wander.enabled = false; }
          );
