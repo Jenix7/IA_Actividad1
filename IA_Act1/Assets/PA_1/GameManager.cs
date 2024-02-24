@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviour
     public List<Menu> menus;
     private int currentMenuIndex = -1;
     private List<GameObject> allMenuElements = new List<GameObject>();
+    private bool isInitialMenu;
 
     void Awake()
     {
         PopulateAllMenuElements();
         Time.timeScale = 0f;
+        isInitialMenu = true;
     }
 
     void Start()
@@ -27,10 +29,14 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (isInitialMenu)
         {
-            AdvanceMenu();
+            if (Input.anyKeyDown)
+            {
+                AdvanceMenu();
+            }
         }
+        
     }
 
     void PopulateAllMenuElements()
@@ -82,5 +88,6 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
         Time.timeScale = 1f;
+        isInitialMenu = false;
     }
 }
