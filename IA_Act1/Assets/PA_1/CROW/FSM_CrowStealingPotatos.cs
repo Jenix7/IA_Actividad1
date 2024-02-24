@@ -10,7 +10,7 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
     private Crow_Blackboard blackboard;
     private SteeringContext steeringContext;
 
-    private GameObject detectedPotato;
+    
     private GameObject detectedNest;
 
 
@@ -53,15 +53,15 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
         );
 
         State REACH_POTATO = new State("REACH POTATO",
-            () => { arrive.target = detectedPotato; arrive.enabled = true; },
+            () => { arrive.target = blackboard.detectedPotato; arrive.enabled = true; },
             () => { },
             () => { arrive.enabled = false; }
         );
 
         State TAKE_POTATO = new State("TAKE POTATO",
             () => {
-                detectedPotato.transform.parent = transform;
-                detectedPotato.tag = "STEALED_POTATO";
+                blackboard.detectedPotato.transform.parent = transform;
+                blackboard.detectedPotato.tag = "STEALED_POTATO";
                 detectedNest = blackboard.GetTheNearestNest();
                 arrive.target = detectedNest;
                 arrive.enabled = true;
@@ -75,8 +75,8 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
 
         Transition potatoDetected = new Transition("Potato Detected",
             () => {
-                detectedPotato = SensingUtils.FindInstanceWithinRadius(gameObject, "POTATO", blackboard.potatoDetectionRadius);
-                return detectedPotato != null;
+                blackboard.detectedPotato = SensingUtils.FindInstanceWithinRadius(gameObject, "POTATO", blackboard.potatoDetectionRadius);
+                return blackboard.detectedPotato != null;
             }
         );
 
@@ -86,11 +86,11 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
 
         Transition potatoVanished = new Transition("Potato Vanished",
             () => { 
-                return detectedPotato == null || detectedPotato.Equals(null) || detectedPotato.tag != "POTATO"; }
+                return blackboard.detectedPotato == null || blackboard.detectedPotato.Equals(null) || blackboard.detectedPotato.tag != "POTATO"; }
         );
 
         Transition potatoReached = new Transition("Potato Reached",
-            () => { return SensingUtils.DistanceToTarget(gameObject, detectedPotato) < blackboard.placeReachedRadius; }
+            () => { return SensingUtils.DistanceToTarget(gameObject, blackboard.detectedPotato) < blackboard.placeReachedRadius; }
         );
 
         Transition nestReached = new Transition("Nest Reached",

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Crow_Blackboard : DynamicBlackboard
 {
+    public GameObject detectedPotato;
     [Space(10)]
     [Header("RADIOUS")]
     public float potatoDetectionRadius = 150f;

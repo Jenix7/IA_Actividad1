@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,12 +16,14 @@ public class Score : MonoBehaviour
     public GameObject sceneHUD;
     public GameObject winMenu;
     public GameObject gameOverMenu;
+    public MoveToClick moveToClick;
     Text score;
     // Start is called before the first frame update
     void Start()
     {
         score = GetComponent<Text>();
         potatoScoreValue = 0;
+        moveToClick = GameObject.Find("Pin").GetComponent<MoveToClick>();
     }
 
     private void Awake()
@@ -47,7 +50,7 @@ public class Score : MonoBehaviour
         }
         if (isGameOver)
         {
-
+            moveToClick.enabled = false;
             sceneHUD.SetActive(false);
             PauseGame();
             gameOverMenu.SetActive(true);
@@ -56,6 +59,7 @@ public class Score : MonoBehaviour
 
         if (isGameWon)
         {
+            moveToClick.enabled = false;
             sceneHUD.SetActive(false);
             PauseGame();
             winMenu.SetActive(true);
@@ -77,7 +81,8 @@ public class Score : MonoBehaviour
         potatoScoreValue = 0;
         potatoRecolectedInScene = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
+        moveToClick.enabled = true;
+
 
     }
 }

@@ -8,6 +8,7 @@ public class FSM_Crow : FiniteStateMachine
     private Flee flee;
     private SteeringContext steeringContext;
     private Crow_Blackboard blackboard;
+    
 
 
     public override void OnEnter()
@@ -34,10 +35,11 @@ public class FSM_Crow : FiniteStateMachine
         State FLEE = new State("FLEE",
            () =>
            {
-               if (transform.childCount > 0) { transform.GetChild(0).tag = "POTATO"; transform.GetChild(0).transform.parent = null; }
+               if (transform.childCount > 0) { transform.GetChild(0).tag = "POTATO"; transform.GetChild(0).transform.parent = null;   }
                flee.target = blackboard.scarecrow;
                flee.enabled = true;
                steeringContext.maxSpeed *= blackboard.speedIncreaserFlee;
+               blackboard.detectedPotato.tag = "POTATO";
            },
            () => { },
            () => { flee.enabled = false;
