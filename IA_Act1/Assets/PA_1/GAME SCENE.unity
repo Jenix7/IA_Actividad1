@@ -6160,7 +6160,7 @@ MonoBehaviour:
   enemyVanishedRadius: 140
   pinReachedRadius: 50
   screamDuration: 1
-  speedIncreaserSprint: 4
+  speedIncreaserSprint: 2
   energySlider: {fileID: 1469850000}
   maxEnergy: 20
   energy: 25
