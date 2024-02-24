@@ -40,6 +40,7 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
         State REACH_CENTER = new State("REACH CENTER",
            () => {
                if (transform.childCount > 0) transform.GetChild(0).transform.parent = null;
+               steeringContext.maxSpeed = blackboard.originalVelocity;
                arrive.target = blackboard.centerPoint;
                arrive.enabled = true; },
            () => { },
@@ -68,7 +69,7 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
                 steeringContext.maxSpeed = steeringContext.maxSpeed/blackboard.speedDecreaserTakingPotato;
             },
             () => { },
-            () => { arrive.enabled = false; steeringContext.maxSpeed *= blackboard.speedDecreaserTakingPotato; Score.potatoRecolectedInScene++; }
+            () => { arrive.enabled = false; steeringContext.maxSpeed = blackboard.originalVelocity; Score.potatoRecolectedInScene++; }
         );
 
         //STAGE 2----------------------------------------
