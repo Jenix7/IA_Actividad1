@@ -16,7 +16,7 @@ public class FSM_Crow : FiniteStateMachine
         flee = GetComponent<Flee>();
         steeringContext = GetComponent<SteeringContext>();
         blackboard = GetComponent<Crow_Blackboard>();
-
+        
         base.OnEnter();
     }
 

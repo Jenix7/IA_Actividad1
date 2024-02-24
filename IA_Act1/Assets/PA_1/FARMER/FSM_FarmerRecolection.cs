@@ -111,6 +111,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         AddStates(WANDERING, REACH_POTATO, REACH_HOME);
 
         AddTransition(WANDERING, potatoDetected, REACH_POTATO);
+        AddTransition(REACH_POTATO, potatoVanished, WANDERING);
         AddTransition(REACH_POTATO, potatoReached, REACH_HOME);
         AddTransition(REACH_HOME, homeReached, WANDERING);
 

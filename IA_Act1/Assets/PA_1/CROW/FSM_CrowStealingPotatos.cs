@@ -29,6 +29,11 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
     public override void OnExit()
     {
         if (transform.childCount > 0) transform.GetChild(0).transform.parent = null;
+        if (blackboard.detectedPotato != null)
+        {
+            blackboard.detectedPotato.transform.parent = null;
+            blackboard.detectedPotato.tag = "POTATO";
+        }
         DisableAllSteerings();
         base.OnExit();
     }
@@ -41,7 +46,9 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
            () => {
                if (transform.childCount > 0) transform.GetChild(0).transform.parent = null;
                arrive.target = blackboard.centerPoint;
-               arrive.enabled = true; },
+               arrive.enabled = true;
+               steeringContext.maxSpeed = blackboard.originalVelocity;
+           },
            () => { },
            () => { arrive.enabled = false; }
        );
@@ -68,7 +75,7 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
                 steeringContext.maxSpeed = steeringContext.maxSpeed/blackboard.speedDecreaserTakingPotato;
             },
             () => { },
-            () => { arrive.enabled = false; steeringContext.maxSpeed *= blackboard.speedDecreaserTakingPotato; Score.potatoRecolectedInScene++; }
+            () => { arrive.enabled = false; steeringContext.maxSpeed *= blackboard.speedDecreaserTakingPotato; Score.potatoRecolectedInScene++; blackboard.detectedPotato.tag = "NOPOTATO"; }
         );
 
         //STAGE 2----------------------------------------

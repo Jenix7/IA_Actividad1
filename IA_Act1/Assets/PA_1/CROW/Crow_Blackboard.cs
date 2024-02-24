@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Crow_Blackboard : DynamicBlackboard
 {
+    SteeringContext steeringContext;
     public GameObject detectedPotato;
+    public float originalVelocity;
     [Space(10)]
     [Header("RADIOUS")]
     public float potatoDetectionRadius = 150f;
@@ -29,9 +31,12 @@ public class Crow_Blackboard : DynamicBlackboard
 
     void Awake()
     {
+        steeringContext = GetComponent<SteeringContext>();
+        originalVelocity = steeringContext.maxSpeed;
         nestList = GameObject.FindGameObjectsWithTag("NEST");
         centerPoint = GameObject.FindGameObjectWithTag("CENTER");
         scarecrow = GameObject.FindGameObjectWithTag("SCARECROW");
+        
     }
 
     public GameObject GetTheNearestNest()
