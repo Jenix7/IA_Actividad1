@@ -6270,6 +6270,10 @@ PrefabInstance:
       propertyPath: potatoReachedRadius
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: -6102987240720473223, guid: a51e7441d6953db4ca2326704bf25fb8, type: 3}
+      propertyPath: farmerDetectionRadius
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: -2951827511317206264, guid: a51e7441d6953db4ca2326704bf25fb8, type: 3}
       propertyPath: rotationalPolicy
       value: 1

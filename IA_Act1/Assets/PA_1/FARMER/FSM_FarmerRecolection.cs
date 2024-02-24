@@ -91,7 +91,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
 
         Transition potatoVanished = new Transition("Potato Vanished",
             () => {
-                return thePotato == null || thePotato.Equals(null) || thePotato.tag != "POTATO";
+                return thePotato == null || thePotato.Equals(null) || thePotato.tag != "POTATO"|| thePotato.Equals("NOPOTATO")|| thePotato.Equals("STEALEDPOTATO");
             }
         );
 
@@ -111,6 +111,7 @@ public class FSM_FarmerRecolection : FiniteStateMachine
         AddStates(WANDERING, REACH_POTATO, REACH_HOME);
 
         AddTransition(WANDERING, potatoDetected, REACH_POTATO);
+        AddTransition(REACH_POTATO, potatoVanished, REACH_HOME);
         AddTransition(REACH_POTATO, potatoReached, REACH_HOME);
         AddTransition(REACH_HOME, homeReached, WANDERING);
 
