@@ -5,7 +5,7 @@ public class GroupManager_flys : Steerings.GroupManager
     public int numInstances = 20;
     public float delay = 0.5f;
     public GameObject prefab;
-    public bool around = false;
+    public bool around = true;
     public GameObject attractor;
 
     private int created = 0;
@@ -55,14 +55,14 @@ public class GroupManager_flys : Steerings.GroupManager
         clone.transform.position = transform.position;
         if (around)
         {
-            clone.AddComponent<Steerings.FlockingAroundPlusAvoidance>();
-            clone.GetComponent<Steerings.FlockingAroundPlusAvoidance>().attractor = attractor;
-            clone.GetComponent<Steerings.FlockingAroundPlusAvoidance>().rotationalPolicy = Steerings.SteeringBehaviour.RotationalPolicy.LWYGI;
+            clone.AddComponent<Steerings.FlockingAround>();
+            clone.GetComponent<Steerings.FlockingAround>().attractor = attractor;
+            clone.GetComponent<Steerings.FlockingAround>().rotationalPolicy = Steerings.SteeringBehaviour.RotationalPolicy.LWYGI;
         }
         else
         {
-            clone.AddComponent<Steerings.FlockingPlusAvoidance>();
-            clone.GetComponent<Steerings.FlockingPlusAvoidance>().rotationalPolicy = Steerings.SteeringBehaviour.RotationalPolicy.LWYGI;
+            clone.AddComponent<Steerings.FlockingAround>();
+            clone.GetComponent<Steerings.FlockingAround>().rotationalPolicy = Steerings.SteeringBehaviour.RotationalPolicy.LWYGI;
         }
 
 
