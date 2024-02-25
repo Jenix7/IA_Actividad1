@@ -161,7 +161,7 @@ MonoBehaviour:
   wanderOffset: 20
   showWanderGizmos: 0
   wanderTargetOrientation: 0
-  seekWeight: 0.15
+  seekWeight: 0.2
   lookAheadLength: 20
   avoidDistance: 22
   secondaryWhiskerAngle: 30
