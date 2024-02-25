@@ -13,6 +13,10 @@ GameObject:
   - component: {fileID: -7975555907357695161}
   - component: {fileID: -6334436856946045339}
   - component: {fileID: -5786101614418319451}
+  - component: {fileID: -6343334575151570960}
+  - component: {fileID: 1224924212173171965}
+  - component: {fileID: 1925498501223467046}
+  - component: {fileID: 1164682373393465572}
   m_Layer: 0
   m_Name: Fly
   m_TagString: FLY
@@ -129,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fadfb23a909584e8ff82b91a0977c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 100
+  maxAcceleration: 40
   maxSpeed: 20
   clipVelocity: 1
   maxAngularAcceleration: 180
@@ -157,7 +161,7 @@ MonoBehaviour:
   wanderOffset: 20
   showWanderGizmos: 0
   wanderTargetOrientation: 0
-  seekWeight: 0.1
+  seekWeight: 0.15
   lookAheadLength: 20
   avoidDistance: 22
   secondaryWhiskerAngle: 30
@@ -171,3 +175,68 @@ MonoBehaviour:
   speed: 0
   angularSpeed: 0
   groupManager: {fileID: 0}
+--- !u!114 &-6343334575151570960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578393370512129024}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823459bfcabf59e4bbb7d30c1033e0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fsm: {fileID: 11400000, guid: ad42c5adad45693408041bee72429cbc, type: 2}
+  currentState: 
+  textMesh: {fileID: 0}
+--- !u!114 &1224924212173171965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578393370512129024}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1c6fa0d5ba45c4eb509c1ad6e53e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationalPolicy: 4
+  target: {fileID: 0}
+--- !u!114 &1925498501223467046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578393370512129024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3facbb136ce00f49a2c7deadcf53f0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationalPolicy: 0
+  attractor: {fileID: 0}
+--- !u!114 &1164682373393465572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578393370512129024}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d272a77e85a4549963429822cae4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectedPotato: {fileID: 0}
+  scareCrow: {fileID: 2576313199256843378, guid: 7f390ac7e654a3c419d1e026d9edabf1, type: 3}
+  centerPoint: {fileID: 0}
+  eatingTime: 7
+  speedIncreaserSprint: 2
+  potatoDetectionRadius: 90
+  scarecrowDetectionRadius: 170
+  scarecrowSafeDistance: 220
+  placeReachedRadius: 80
+  gizmosActive: 0

@@ -10,9 +10,12 @@ public class FSM_Fly : FiniteStateMachine
      * states and transitions and/or set in OnEnter or used in OnExit 
      * For instance: steering behaviours, blackboard, ...*/
     private Arrive arrive;
-    private FlockingAroundPlusAvoidance flocking;
-    //private Crow_Blackboard blackboard;
+    private FlockingAround flockingA;
+    private WanderAround wanderAround;
+    private Fly_Blackboard blackboard;
     private SteeringContext steeringContext;
+    private float elapsedTime;
+    private GameObject potato;
 
     public override void OnEnter()
     {
@@ -20,11 +23,12 @@ public class FSM_Fly : FiniteStateMachine
          * It's equivalent to the on enter action of any state 
          * Usually this code includes .GetComponent<...> invocations */
         arrive = GetComponent<Arrive>();
-        flocking = GetComponent<FlockingAroundPlusAvoidance>();
-        //blackboard = GetComponent<Crow_Blackboard>();
+        flockingA = GetComponent<FlockingAround>();
+        blackboard = GetComponent<Fly_Blackboard>();
+        wanderAround = GetComponent<WanderAround>();
         steeringContext = GetComponent<SteeringContext>();
 
-        //wanderAround.attractor = blackboard.centerPoint;
+        flockingA.attractor = blackboard.centerPoint;
         base.OnEnter(); // do not remove
     }
 
@@ -50,17 +54,36 @@ public class FSM_Fly : FiniteStateMachine
         );
 
          */
-        State FLOCKING = new State("FLOCKING",
-          () =>
-          {
-              if (transform.childCount > 0) transform.GetChild(0).transform.parent = null;
-              arrive.target = blackboard.centerPoint;
-              arrive.enabled = true;
-              steeringContext.maxSpeed = blackboard.originalVelocity;
-          },
-          () => { },
-          () => { arrive.enabled = false; }
-          );
+        //State FLOCKING = new State("FLOCKING",
+        //  () =>
+        //  {
+        //      if (transform.childCount > 0) transform.GetChild(0).transform.parent = null;
+        //      flockingA.enabled = true;
+        //  },
+        //  () => { },
+        //  () => { flockingA.enabled = false; }
+        //  );
+
+        State FLOCKING = new State("WANDER",
+         () =>
+         { wanderAround.enabled = true; },
+         () => { },
+         () => { wanderAround.enabled = false; }
+         );
+
+        State REACH_POTATO = new State("REACH POTATO",
+            () => { arrive.target = blackboard.detectedPotato; arrive.enabled = true; },
+            () => { },
+            () => { arrive.enabled = false; }
+        );
+
+        State EAT_POTATO = new State("EAT POTATO",
+            () => {
+                elapsedTime = 0; steeringContext.maxSpeed /= blackboard.speedIncreaserSprint;
+            },
+            () => { elapsedTime += Time.deltaTime; },
+            () => { steeringContext.maxSpeed *= blackboard.speedIncreaserSprint;  Destroy(blackboard.detectedPotato); }
+        );
 
 
         /* STAGE 2: create the transitions with their logic(s)
@@ -73,22 +96,47 @@ public class FSM_Fly : FiniteStateMachine
 
         */
 
+        Transition potatoDetected = new Transition("Potato Detected",
+            () => {
+                blackboard.detectedPotato = SensingUtils.FindInstanceWithinRadius(gameObject, "POTATO", blackboard.potatoDetectionRadius);
+                return blackboard.detectedPotato != null;
+            }
+        );
 
-          /* STAGE 3: add states and transitions to the FSM 
-           * ----------------------------------------------
+        Transition potatoReached = new Transition("Potato Reached",
+            () => { return SensingUtils.DistanceToTarget(gameObject, blackboard.detectedPotato) < blackboard.placeReachedRadius; }
+        );
 
-          AddStates(...);
+        Transition foodEaten = new Transition("Food Eaten",
+            () => {
+                //return SensingUtils.DistanceToTarget(gameObject, blackboard.scareCrow) < blackboard.scarecrowDetectionRadius ||
+                return elapsedTime >= blackboard.eatingTime;
+            }
+        );
 
-          AddTransition(sourceState, transition, destinationState);
+        /* STAGE 3: add states and transitions to the FSM 
+         * ----------------------------------------------
 
-           */
+        AddStates(...);
+
+        AddTransition(sourceState, transition, destinationState);
+
+         */
+        AddStates(FLOCKING, REACH_POTATO, EAT_POTATO);
+
+        //AddTransition(REACH_POTATO, potatoDetected, EAT_POTATO);
+        AddTransition(FLOCKING, potatoReached, REACH_POTATO);
+        AddTransition(REACH_POTATO, potatoDetected, EAT_POTATO);
+        AddTransition(EAT_POTATO, foodEaten, FLOCKING);
 
 
-          /* STAGE 4: set the initial state
+        /* STAGE 4: set the initial state
 
-          initialState = ... 
+        initialState = ... 
 
-           */
+         */
+
+        initialState = REACH_POTATO;
 
     }
 }

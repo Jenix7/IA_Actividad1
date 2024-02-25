@@ -117,6 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e463b8b6eb199c4098cd8a285407e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectedPotato: {fileID: 0}
+  originalVelocity: 0
   potatoDetectionRadius: 110
   scarecrowDetectionRadius: 45
   scarecrowSafeDistance: 220
@@ -167,7 +169,7 @@ MonoBehaviour:
   wanderOffset: 30
   showWanderGizmos: 1
   wanderTargetOrientation: 0
-  seekWeight: 0.3
+  seekWeight: 0.15
   lookAheadLength: 10
   avoidDistance: 12
   secondaryWhiskerAngle: 30
