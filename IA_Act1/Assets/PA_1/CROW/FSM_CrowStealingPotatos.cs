@@ -98,13 +98,6 @@ public class FSM_CrowStealingPotatos : FiniteStateMachine
             () => { return SensingUtils.DistanceToTarget(gameObject, detectedNest) < blackboard.placeReachedRadius; }
         );
 
-        //Transition scarecrowDetected = new Transition("Scarecrow Detected",
-        //    () => {
-        //        ?? = SensingUtils.FindInstanceWithinRadius(gameObject, "SCARECROW", blackboard.scarecrowDetectionRadius);
-        //        return ??!= null;
-        //    }
-        //);
-
 
         //STAGE 3----------------------------------------
 

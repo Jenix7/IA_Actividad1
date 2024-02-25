@@ -74,7 +74,7 @@ public class FSM_ScarecrowPatrol : FiniteStateMachine
             () => { }
             );
 
-        Transition endScream = new Transition("FarEnough",
+        Transition endScream = new Transition("End Scream",
             () => { return elapsedTime >= blackboard.screamDuration; },
             () => { }
             );
